@@ -20,7 +20,7 @@ public class JmsProducer {
     public void sendMessage(Employee message){
         try{
             log.info("Attempting Send message to Topic: "+ topic);
-                    jmsTemplate.convertAndSend("TEST", String.format("{}", message));
+                    jmsTemplate.convertAndSend("TEST", message.toString());
         } catch(Exception e){
            log.error("Recieved Exception during send Message: ", e);
         }
