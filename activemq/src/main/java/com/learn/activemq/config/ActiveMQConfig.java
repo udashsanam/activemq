@@ -1,6 +1,7 @@
 package com.learn.activemq.config;
 
 import jakarta.jms.ConnectionFactory;
+import jakarta.jms.MessageListener;
 import org.apache.activemq.ActiveMQConnectionFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -8,6 +9,7 @@ import org.springframework.context.annotation.Configuration;
 import org.springframework.jms.annotation.EnableJms;
 import org.springframework.jms.config.DefaultJmsListenerContainerFactory;
 import org.springframework.jms.core.JmsTemplate;
+import org.springframework.jms.listener.DefaultMessageListenerContainer;
 
 import java.util.Arrays;
 
@@ -46,6 +48,17 @@ public class ActiveMQConfig {
 //        factory.setPubSubDomain(true);
 //        return factory;
 //    }
+
+    @Bean
+    public DefaultMessageListenerContainer listenerContainer(ConnectionFactory connectionFactory,
+                                                             MessageListener listener) {
+        DefaultMessageListenerContainer container = new DefaultMessageListenerContainer();
+        container.setConnectionFactory(connectionFactory);
+        container.setDestinationName("myQueue");
+        container.setMessageListener(listener);
+        return container;
+    }
+
 
 
 
