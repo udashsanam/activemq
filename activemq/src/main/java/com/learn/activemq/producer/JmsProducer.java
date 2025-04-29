@@ -25,8 +25,6 @@ public class JmsProducer {
             jmsTemplate.convertAndSend("TEST", "hello");
             jmsTemplate.convertAndSend("TEST", "hello");
             jmsTemplate.convertAndSend("TEST", "hello");
-
-            jmsTemplate.convertAndSend("TEST", message);
         } catch(Exception e){
            log.error("Recieved Exception during send Message: ", e);
         }
