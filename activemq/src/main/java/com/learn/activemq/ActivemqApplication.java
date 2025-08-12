@@ -7,8 +7,10 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.event.EventListener;
+import org.springframework.scheduling.annotation.EnableScheduling;
 
 @SpringBootApplication
+@EnableScheduling
 public class ActivemqApplication {
 
     @Autowired
@@ -18,13 +20,14 @@ public class ActivemqApplication {
         SpringApplication.run(ActivemqApplication.class, args);
     }
 
-    @EventListener(ApplicationReadyEvent.class)
-    public void onReady(){
-
-        Employee employee = new Employee();
-        employee.setAddress("test");
-        employee.setName("test");
-        jmsProducer.sendMessage(employee);
-    }
+//    @EventListener(ApplicationReadyEvent.class)
+//    public void onReady() throws Exception {
+//
+////        Employee employee = new Employee();
+////        employee.setAddress("test");
+////        employee.setName("test");
+////        jmsProducer.sendMessage(employee);
+//        jmsProducer.sendUsingRawJms();
+//    }
 
 }
